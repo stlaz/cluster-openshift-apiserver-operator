@@ -43,6 +43,8 @@ spec:
         env:
         - name: IMAGE
           value: quay.io/openshift/origin-openshift-apiserver:v4.2
+        - name: OPERATOR_IMAGE
+          value: docker.io/openshift/origin-cluster-openshift-apiserver-operator:v4.0
         - name: OPERATOR_IMAGE_VERSION
           value: "0.0.1-snapshot"
         - name: OPERAND_IMAGE_VERSION

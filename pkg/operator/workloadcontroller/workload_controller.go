@@ -38,8 +38,9 @@ const (
 )
 
 type OpenShiftAPIServerOperator struct {
-	targetImagePullSpec string
-	versionRecorder     status.VersionGetter
+	targetImagePullSpec   string
+	operatorImagePullSpec string
+	versionRecorder       status.VersionGetter
 
 	operatorConfigClient    operatorv1client.OpenShiftAPIServersGetter
 	openshiftConfigClient   openshiftconfigclientv1.ConfigV1Interface
@@ -52,7 +53,7 @@ type OpenShiftAPIServerOperator struct {
 }
 
 func NewWorkloadController(
-	targetImagePullSpec string,
+	targetImagePullSpec, operatorImagePullSpec string,
 	versionRecorder status.VersionGetter,
 	operatorConfigInformer operatorv1informers.OpenShiftAPIServerInformer,
 	kubeInformersForOpenShiftAPIServerNamespace kubeinformers.SharedInformerFactory,
@@ -67,8 +68,9 @@ func NewWorkloadController(
 	eventRecorder events.Recorder,
 ) *OpenShiftAPIServerOperator {
 	c := &OpenShiftAPIServerOperator{
-		targetImagePullSpec: targetImagePullSpec,
-		versionRecorder:     versionRecorder,
+		targetImagePullSpec:   targetImagePullSpec,
+		operatorImagePullSpec: operatorImagePullSpec,
+		versionRecorder:       versionRecorder,
 
 		operatorConfigClient:    operatorConfigClient,
 		openshiftConfigClient:   openshiftConfigClient,
